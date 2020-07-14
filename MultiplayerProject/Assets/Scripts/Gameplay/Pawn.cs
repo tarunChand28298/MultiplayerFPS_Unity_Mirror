@@ -103,6 +103,10 @@ public class Pawn : NetworkBehaviour
             Camera.main.transform.localPosition = Vector3.zero;
             Camera.main.transform.localRotation = Quaternion.identity;
         });
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        ApplicationManager.Instance().cursorShouldBeLocked = true;
     }
     [TargetRpc] void TargetPullOutCamera()
     {
@@ -110,5 +114,9 @@ public class Pawn : NetworkBehaviour
         Transform toXform = GameObject.FindGameObjectWithTag("PulloutCamTransform").transform;
         LeanTween.move(Camera.main.gameObject, toXform, 1.0f);
         LeanTween.rotate(Camera.main.gameObject, toXform.eulerAngles, 1.0f);
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        ApplicationManager.Instance().cursorShouldBeLocked = false;
     }
 }

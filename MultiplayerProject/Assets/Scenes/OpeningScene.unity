@@ -1845,6 +1845,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09f838521f1ecbc469ea95238ad145c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  openingScene: Assets/Scenes/OpeningScene.unity
+  pauseMenuPanel: {fileID: 2120981476267438598, guid: a8636bec8baa66a43b8c93754f85b31f,
+    type: 3}
+  cursorShouldBeLocked: 0
 --- !u!1 &1645656417
 GameObject:
   m_ObjectHideFlags: 0

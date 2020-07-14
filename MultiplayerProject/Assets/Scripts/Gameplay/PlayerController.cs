@@ -15,12 +15,6 @@ public class PlayerController : NetworkBehaviour
 
     Transform pawnCameraGimbal;
 
-    private void Start()
-    {
-        if (!hasAuthority) return;
-        Cursor.lockState = CursorLockMode.Locked;
-    }
-
     private void Update()
     {
         if (!hasAuthority) { return; }

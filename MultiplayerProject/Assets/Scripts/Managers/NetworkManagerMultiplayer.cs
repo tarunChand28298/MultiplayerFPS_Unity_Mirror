@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Mirror;
 
 class PlayerControllerInit : MessageBase
@@ -20,6 +21,21 @@ public class NetworkManagerMultiplayer : NetworkManager
     public GameObject playerControllerPrefab;
     public GameObject promptUI;
     public GameManager gameManager;
+
+    public event Action OnClientDisconnectEventFired;
+    public event Action OnClientStoppedEventFired;
+
+    public override void OnStopClient()
+    {
+        base.OnStopClient();
+        OnClientStoppedEventFired?.Invoke();
+    }
+
+    public override void OnClientDisconnect(NetworkConnection conn)
+    {
+        base.OnClientDisconnect(conn);
+        OnClientStoppedEventFired?.Invoke();
+    }
 
     public override void OnClientSceneChanged(NetworkConnection conn)
     {
