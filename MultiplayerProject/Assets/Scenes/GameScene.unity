@@ -778,6 +778,10 @@ MonoBehaviour:
   overheadCam: {fileID: 2057166790}
   TeamASpawnPoint: {fileID: 1074196180}
   TeamBSpawnPoint: {fileID: 1112598506}
+  scoreUIPrefab: {fileID: 6599841249645863374, guid: 446ca06df1a631248a3d3ba3bdfd80bc,
+    type: 3}
+  teamAScore: 0
+  teamBScore: 0
 --- !u!114 &1266922423
 MonoBehaviour:
   m_ObjectHideFlags: 0

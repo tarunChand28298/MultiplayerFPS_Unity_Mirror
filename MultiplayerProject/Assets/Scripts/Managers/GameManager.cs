@@ -11,10 +11,22 @@ public class GameManager : NetworkBehaviour
     public Transform TeamASpawnPoint;
     public Transform TeamBSpawnPoint;
 
+    public GameObject scoreUIPrefab;
+    GameObject currentScoreUIGameObject;
+
     private bool putInA = true;
 
+    [SyncVar(hook = nameof(UpdateScoreUIForA))] public int teamAScore = 0;
+    [SyncVar(hook = nameof(UpdateScoreUIForB))] public int teamBScore = 0;
     public SyncGameObjects teamA;
     public SyncGameObjects teamB;
+
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+        GameObject uiCanvas = GameObject.FindGameObjectWithTag("GameCanvas");
+        currentScoreUIGameObject = Instantiate(scoreUIPrefab, uiCanvas.transform);
+    }
 
     public void AdmitToGame(GameObject newController)
     {
@@ -32,15 +44,19 @@ public class GameManager : NetworkBehaviour
         NetworkServer.Spawn(newPawn, controller.gameObject);
 
         controller.controlledPawn = newPawn;
+        newPawn.GetComponent<NetworkIdentity>().AssignClientAuthority(controller.connectionToClient);
         newPawn.GetComponent<Pawn>().teamColour = teamA.Contains(controller.gameObject) ? Color.red : Color.blue;
         newPawn.GetComponent<Pawn>().PullInCamera();
         newPawn.GetComponent<Pawn>().playerController = controller;
-        newPawn.GetComponent<Pawn>().totalBulletsLeft = 50;
+        newPawn.GetComponent<Pawn>().totalBulletsLeft = 100;
         newPawn.GetComponent<Pawn>().health = 100;
     }
 
     public void WhenPlayerDies(PlayerController controller)
     {
+        if (teamA.Contains(controller.gameObject)) { teamBScore++; }
+        else { teamAScore++; }
+
         StartCoroutine(WhenPlayerDiesCoroutine(controller));
     }
 
@@ -51,6 +67,15 @@ public class GameManager : NetworkBehaviour
         yield return new WaitForSeconds(1);
 
         NetworkServer.Destroy(controller.controlledPawn);
+    }
+
+    void UpdateScoreUIForA(int oldValue, int newValue)
+    {
+        currentScoreUIGameObject.GetComponent<ScoreUI>().UpdateScoreForA(newValue);
+    }
+    void UpdateScoreUIForB(int oldValue, int newValue)
+    { 
+        currentScoreUIGameObject.GetComponent<ScoreUI>().UpdateScoreForB(newValue);
     }
 
 }

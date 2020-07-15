@@ -366,6 +366,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  playerController: {fileID: 0}
+  playerStateUIPrefab: {fileID: 4711649373962763458, guid: d71e682d60cc2324ca8180b97432b4f3,
+    type: 3}
   bulletPrefab: {fileID: 8351960459993467884, guid: 7ee8b781236759549b01a0bf25a4342c,
     type: 3}
   childCube: {fileID: 7138602104995411404}
@@ -377,6 +380,8 @@ MonoBehaviour:
   muzzelTransform: {fileID: 344889605866572446}
   gunTransform: {fileID: 5934297990189548287}
   gunGfx: {fileID: 316653108706672012}
+  dead: 0
+  health: 0
   reloading: 0
   bulletsInMag: 0
   totalBulletsLeft: 0

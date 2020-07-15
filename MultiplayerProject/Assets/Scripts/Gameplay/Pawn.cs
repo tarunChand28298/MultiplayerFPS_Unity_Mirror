@@ -5,6 +5,9 @@ public class Pawn : NetworkBehaviour
 {
     public PlayerController playerController;
 
+    public GameObject playerStateUIPrefab;
+    GameObject currentPlayerStateUIGameObject;
+
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] GameObject childCube;
     public Transform cameraPos;
@@ -15,11 +18,12 @@ public class Pawn : NetworkBehaviour
     public Transform gunTransform;
     public GameObject gunGfx;
 
-    [SyncVar] public int health;
+    [SyncVar] public bool dead;
+    [SyncVar(hook =nameof(PlayerHealthUIChanged))] public int health;
 
-    public static int bulletsPerMag = 3;
+    public static int bulletsPerMag = 10;
     [SyncVar] public bool reloading;
-    [SyncVar] public int bulletsInMag;
+    [SyncVar(hook =nameof(BulletsInMagChanged))] public int bulletsInMag;
     [SyncVar] public int totalBulletsLeft;
 
     public float recoilAnimDuration;
@@ -49,8 +53,8 @@ public class Pawn : NetworkBehaviour
 
     public void Shoot()
     {
-        bulletsInMag--;
         totalBulletsLeft--;
+        bulletsInMag--;
 
         GameObject newBullet = Instantiate(bulletPrefab, muzzelTransform.position, muzzelTransform.rotation);
         NetworkServer.Spawn(newBullet);
@@ -71,7 +75,8 @@ public class Pawn : NetworkBehaviour
 
         if(health <= 0)
         {
-            playerController.NotifyGameManagerOfDeath();
+            if(!dead) playerController.NotifyGameManagerOfDeath();
+            dead = true;
         }
 
     }
@@ -119,4 +124,36 @@ public class Pawn : NetworkBehaviour
         Cursor.visible = true;
         ApplicationManager.Instance().cursorShouldBeLocked = false;
     }
+
+    void PlayerHealthUIChanged(int oldValue, int newValue)
+    {
+        if (currentPlayerStateUIGameObject == null) return;
+        currentPlayerStateUIGameObject.GetComponent<PlayerStateUIScript>().SetHealthText(newValue);
+    }
+
+    void BulletsInMagChanged(int oldValue, int newValue)
+    {
+        if (currentPlayerStateUIGameObject == null) return;
+        currentPlayerStateUIGameObject.GetComponent<PlayerStateUIScript>().SetBulletsText(bulletsInMag, totalBulletsLeft - bulletsInMag);
+    }
+
+    public override void OnStartClient()
+    {
+        if (!hasAuthority) return;
+        base.OnStartClient();
+        GameObject uiCanvas = GameObject.FindGameObjectWithTag("GameCanvas");
+        currentPlayerStateUIGameObject = Instantiate(playerStateUIPrefab, uiCanvas.transform);
+
+        currentPlayerStateUIGameObject.GetComponent<PlayerStateUIScript>().SetHealthText(health);
+        currentPlayerStateUIGameObject.GetComponent<PlayerStateUIScript>().SetBulletsText(bulletsInMag, totalBulletsLeft - bulletsInMag);
+    }
+
+    private void OnDestroy()
+    {
+        if (!hasAuthority) return;
+
+        if (currentPlayerStateUIGameObject == null) return;
+        Destroy(currentPlayerStateUIGameObject);
+    }
+
 }

@@ -102,6 +102,7 @@ public class PlayerController : NetworkBehaviour
     [Command] void CmdReloadGun()
     {
         if (controlledPawn == null) return;
+        if (controlledPawn.GetComponent<Pawn>().bulletsInMag == Pawn.bulletsPerMag) return;
 
         controlledPawn.GetComponent<Pawn>().reloading = true;
         controlledPawn.GetComponent<Pawn>().Reload();
@@ -111,6 +112,7 @@ public class PlayerController : NetworkBehaviour
 
     [ClientRpc] void RpcSetPitchOnPawn(Quaternion absoluteRotation)
     {
+        if (controlledPawn == null) return;
         var pawn = controlledPawn.GetComponent<Pawn>();
         if(pawn != null)
         {
