@@ -43,7 +43,9 @@ public class PlayerController : NetworkBehaviour
         {
             if (controlledPawn.GetComponent<Pawn>().bulletsInMag > 0 && !controlledPawn.GetComponent<Pawn>().reloading)
             {
-                CmdShootGun();
+                RaycastHit hitinfo;
+                bool doesHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hitinfo);
+                CmdShootGun(doesHit, hitinfo.point);
             }
         }
         if (Input.GetButtonDown("Fire2"))
@@ -93,11 +95,11 @@ public class PlayerController : NetworkBehaviour
 
         RpcSetPitchOnPawn(absoluteRotation);
     }
-    [Command] void CmdShootGun()
+    [Command] void CmdShootGun(bool hasHitTarget, Vector3 targetPosition)
     {
         if (controlledPawn == null) return;
 
-        controlledPawn.GetComponent<Pawn>().Shoot();
+        controlledPawn.GetComponent<Pawn>().Shoot(hasHitTarget, targetPosition);
     }
     [Command] void CmdReloadGun()
     {

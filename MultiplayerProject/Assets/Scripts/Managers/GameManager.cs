@@ -64,7 +64,7 @@ public class GameManager : NetworkBehaviour
     {
         controller.controlledPawn.GetComponent<Pawn>().PullOutCamera();
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
 
         NetworkServer.Destroy(controller.controlledPawn);
     }

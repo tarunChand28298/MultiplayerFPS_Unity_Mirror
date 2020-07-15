@@ -51,12 +51,14 @@ public class Pawn : NetworkBehaviour
         TargetPullOutCamera();
     }
 
-    public void Shoot()
+    public void Shoot(bool hasHitTarget, Vector3 hitPosition)
     {
         totalBulletsLeft--;
         bulletsInMag--;
 
         GameObject newBullet = Instantiate(bulletPrefab, muzzelTransform.position, muzzelTransform.rotation);
+        if(hasHitTarget) newBullet.transform.rotation = Quaternion.LookRotation(hitPosition - newBullet.transform.position);
+
         NetworkServer.Spawn(newBullet);
 
         RpcShoot();
@@ -70,12 +72,13 @@ public class Pawn : NetworkBehaviour
     }
     public void TakeDamage(int amount, Vector3 position, Vector3 normal)
     {
+        if (dead) return;
         health -= amount;
         RpcTakeDamage(position, normal);
 
         if(health <= 0)
         {
-            if(!dead) playerController.NotifyGameManagerOfDeath();
+            playerController.NotifyGameManagerOfDeath();
             dead = true;
         }
 
