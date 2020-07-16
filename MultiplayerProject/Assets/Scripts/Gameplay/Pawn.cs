@@ -4,6 +4,8 @@ using UnityEngine;
 public class Pawn : NetworkBehaviour
 {
     public PlayerController playerController;
+    public CharacterController CharacterController;
+
     public GameObject playerStateUIPrefab;
     GameObject currentPlayerStateUIGameObject;
 
@@ -40,8 +42,10 @@ public class Pawn : NetworkBehaviour
     public bool isGrounded = true;
     public float xRotation = 0.0f;
 
-    public AudioSource soundManager;
+    public AudioSource movementCueAudioSource;
+    public AudioSource sfxAudioSource;
     public AudioClip shootSound;
+    public AudioClip reloadSound;
 
     void OnColourChange(Color oldColor, Color newColor)
     {
@@ -97,10 +101,12 @@ public class Pawn : NetworkBehaviour
             gunGfx.transform.localRotation = Quaternion.identity;
         });
         Instantiate(muzzelFlashParticleObject, muzzelTransform.position, muzzelTransform.rotation);
-        soundManager.PlayOneShot(shootSound);
+        sfxAudioSource.PlayOneShot(shootSound);
     }
     [ClientRpc] void RpcReload()
     {
+        sfxAudioSource.PlayOneShot(reloadSound);
+
         LeanTween.rotateLocal(gunGfx, Vector3.right * 50, reloadAnimDuration).setEase(reloadEasingFunction).setOnComplete(() =>
         {
             gunGfx.transform.localRotation = Quaternion.identity;
@@ -174,5 +180,5 @@ public class Pawn : NetworkBehaviour
         if (currentPlayerStateUIGameObject == null) return;
         Destroy(currentPlayerStateUIGameObject);
     }
-
+    
 }
