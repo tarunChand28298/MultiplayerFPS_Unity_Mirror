@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 8351960459993467884}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3041, y: 1.3041, z: 1.3041}
   m_Children:
   - {fileID: 7587427510901477460}
   m_Father: {fileID: 0}
@@ -69,6 +69,10 @@ MonoBehaviour:
   lifetime: 2
   speed: 100
   damageAmount: 20
+  playerHitParticleObject: {fileID: 4960089232712797232, guid: ec134fcaa1bef5f4eb41751b9d86d8f0,
+    type: 3}
+  solidHitParticleObject: {fileID: 4960089232712797232, guid: 3777d14c7d727d743a7669907ae96e21,
+    type: 3}
 --- !u!114 &7402960589782739209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,7 +139,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.09559631
+        value: 0.17558289
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -143,21 +147,21 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.56270856
+        time: 0.5794983
         value: 0
-        inSlope: 0
-        outSlope: 0
+        inSlope: -0.13529487
+        outSlope: -0.13529487
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.22433534
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 0.9339623, g: 0.8611117, b: 0, a: 1}
+      key1: {r: 1, g: 0.5153495, b: 0, a: 0.80784315}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -173,7 +177,7 @@ TrailRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 65535
+      atime1: 47609
       atime2: 0
       atime3: 0
       atime4: 0

@@ -4,9 +4,11 @@ using UnityEngine;
 public class Pawn : NetworkBehaviour
 {
     public PlayerController playerController;
-
     public GameObject playerStateUIPrefab;
     GameObject currentPlayerStateUIGameObject;
+
+    public GameObject teamADeathParticles;
+    public GameObject teamBDeathParticles;
 
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] GameObject childCube;
@@ -17,6 +19,7 @@ public class Pawn : NetworkBehaviour
     public Transform muzzelTransform;
     public Transform gunTransform;
     public GameObject gunGfx;
+    public GameObject muzzelFlashParticleObject;
 
     [SyncVar] public bool dead;
     [SyncVar(hook =nameof(PlayerHealthUIChanged))] public int health;
@@ -36,6 +39,9 @@ public class Pawn : NetworkBehaviour
     public float downwardVelocity;
     public bool isGrounded = true;
     public float xRotation = 0.0f;
+
+    public AudioSource soundManager;
+    public AudioClip shootSound;
 
     void OnColourChange(Color oldColor, Color newColor)
     {
@@ -90,6 +96,8 @@ public class Pawn : NetworkBehaviour
         {
             gunGfx.transform.localRotation = Quaternion.identity;
         });
+        Instantiate(muzzelFlashParticleObject, muzzelTransform.position, muzzelTransform.rotation);
+        soundManager.PlayOneShot(shootSound);
     }
     [ClientRpc] void RpcReload()
     {
@@ -100,7 +108,6 @@ public class Pawn : NetworkBehaviour
     }
     [ClientRpc] void RpcTakeDamage(Vector3 position, Vector3 normal)
     {
-        Debug.Log("Emit particle on player now.");
     }
 
     [TargetRpc] void TargetPullInCamera()
@@ -118,6 +125,11 @@ public class Pawn : NetworkBehaviour
     }
     [TargetRpc] void TargetPullOutCamera()
     {
+        PullOutCameraSelf();
+    }
+
+    void PullOutCameraSelf()
+    {
         Camera.main.transform.SetParent(null);
         Transform toXform = GameObject.FindGameObjectWithTag("PulloutCamTransform").transform;
         LeanTween.move(Camera.main.gameObject, toXform, 1.0f);
@@ -133,7 +145,6 @@ public class Pawn : NetworkBehaviour
         if (currentPlayerStateUIGameObject == null) return;
         currentPlayerStateUIGameObject.GetComponent<PlayerStateUIScript>().SetHealthText(newValue);
     }
-
     void BulletsInMagChanged(int oldValue, int newValue)
     {
         if (currentPlayerStateUIGameObject == null) return;
@@ -150,10 +161,15 @@ public class Pawn : NetworkBehaviour
         currentPlayerStateUIGameObject.GetComponent<PlayerStateUIScript>().SetHealthText(health);
         currentPlayerStateUIGameObject.GetComponent<PlayerStateUIScript>().SetBulletsText(bulletsInMag, totalBulletsLeft - bulletsInMag);
     }
-
-    private void OnDestroy()
+    public override void OnStopClient()
     {
+        base.OnStopClient();
+        GameObject particleToSpawn = teamColour == Color.red ? teamADeathParticles : teamBDeathParticles;
+        Instantiate(particleToSpawn, transform.position, transform.rotation);
+
         if (!hasAuthority) return;
+
+        PullOutCameraSelf();
 
         if (currentPlayerStateUIGameObject == null) return;
         Destroy(currentPlayerStateUIGameObject);

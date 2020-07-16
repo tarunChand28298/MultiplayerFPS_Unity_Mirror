@@ -309,6 +309,7 @@ GameObject:
   - component: {fileID: -4351051781682306441}
   - component: {fileID: -6739283666797351325}
   - component: {fileID: 6475292889835584819}
+  - component: {fileID: 8417207448122355137}
   m_Layer: 9
   m_Name: PawnPrefab
   m_TagString: Player
@@ -369,6 +370,10 @@ MonoBehaviour:
   playerController: {fileID: 0}
   playerStateUIPrefab: {fileID: 4711649373962763458, guid: d71e682d60cc2324ca8180b97432b4f3,
     type: 3}
+  teamADeathParticles: {fileID: 4673281448876610470, guid: 26fd56b97bb185b48a5d72d5ce69047c,
+    type: 3}
+  teamBDeathParticles: {fileID: 4673281448876610470, guid: f55d8743cc3732c4da76fbfda31f3077,
+    type: 3}
   bulletPrefab: {fileID: 8351960459993467884, guid: 7ee8b781236759549b01a0bf25a4342c,
     type: 3}
   childCube: {fileID: 7138602104995411404}
@@ -380,6 +385,8 @@ MonoBehaviour:
   muzzelTransform: {fileID: 344889605866572446}
   gunTransform: {fileID: 5934297990189548287}
   gunGfx: {fileID: 316653108706672012}
+  muzzelFlashParticleObject: {fileID: 4960089232712797232, guid: 9aa19db3857e4ca409d1de5fdf301f1a,
+    type: 3}
   dead: 0
   health: 0
   reloading: 0
@@ -475,6 +482,8 @@ MonoBehaviour:
   downwardVelocity: 0
   isGrounded: 0
   xRotation: 0
+  soundManager: {fileID: 8417207448122355137}
+  shootSound: {fileID: 8300000, guid: ba4ff74f15e2e0e4cac44d635420013b, type: 3}
 --- !u!114 &-6739283666797351325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -511,6 +520,102 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!82 &8417207448122355137
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5668115430244754270}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &7138602104995411404
 GameObject:
   m_ObjectHideFlags: 0
