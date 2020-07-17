@@ -58,17 +58,7 @@ public class GameManager : NetworkBehaviour
         else { teamAScore++; }
 
         NetworkServer.Destroy(controller.controlledPawn);
-        //StartCoroutine(WhenPlayerDiesCoroutine(controller));
     }
-
-    //private IEnumerator WhenPlayerDiesCoroutine(PlayerController controller)
-    //{
-    //    controller.controlledPawn.GetComponent<Pawn>().PullOutCamera();
-
-    //    yield return new WaitForSeconds(0.5f);
-
-    //    NetworkServer.Destroy(controller.controlledPawn);
-    //}
 
     void UpdateScoreUIForA(int oldValue, int newValue)
     {

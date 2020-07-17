@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9146163069742036226}
   - component: {fileID: 3774657397684666462}
   - component: {fileID: 8160396971652629506}
+  - component: {fileID: 7925364839789471006}
   m_Layer: 0
   m_Name: PlayerDeathEffectA
   m_TagString: Untagged
@@ -4908,3 +4909,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7925364839789471006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4673281448876610470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 886030253f5a2f146a17a5e2d95f2b0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

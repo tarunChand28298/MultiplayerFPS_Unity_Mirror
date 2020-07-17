@@ -47,9 +47,18 @@ public class Pawn : NetworkBehaviour
     public AudioClip shootSound;
     public AudioClip reloadSound;
 
+    public Texture albedoTeamA;
+    public Texture albedoTeamB;
+
+    public Texture emmisionA;
+    public Texture emissionB;
+
     void OnColourChange(Color oldColor, Color newColor)
     {
-        childCube.GetComponent<Renderer>().material.SetColor("_Color", newColor);
+        bool isATeam = newColor == Color.red;
+        var currentMaterial = childCube.GetComponent<Renderer>().material;
+        currentMaterial.SetTexture("_MainTex", isATeam ? albedoTeamA : albedoTeamB);
+        currentMaterial.SetTexture("_EmissionMap", isATeam ? emmisionA : emissionB);
     }
 
     public void PullInCamera()
