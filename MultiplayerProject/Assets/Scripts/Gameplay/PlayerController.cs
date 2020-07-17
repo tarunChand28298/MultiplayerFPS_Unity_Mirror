@@ -21,6 +21,7 @@ public class PlayerController : NetworkBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
+            if (controlledPawn != null) return;
             CmdRequestToSpawn();
         }
 

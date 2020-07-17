@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerStateUIScript : MonoBehaviour
 {
     public Text bulletsText;
-    public Text healthText;
+    public RectTransform healthBarAmount;
 
     public void SetBulletsText(int inMag, int spare)
     {
@@ -13,7 +13,9 @@ public class PlayerStateUIScript : MonoBehaviour
 
     public void SetHealthText(int amount)
     {
-        healthText.text = amount.ToString();
+        float healthPercent = (float)amount / 100.0f;
+        var currentScale = healthBarAmount.localScale;
+        healthBarAmount.localScale = new Vector3(healthPercent, currentScale.y, currentScale.z);
     }
 
 }

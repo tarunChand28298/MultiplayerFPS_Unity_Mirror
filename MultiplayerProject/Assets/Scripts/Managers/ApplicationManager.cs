@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 using Mirror;
 
 public class ApplicationManager : MonoBehaviour
@@ -17,9 +16,6 @@ public class ApplicationManager : MonoBehaviour
     GameObject currentlyShowingPauseMenu;
 
     private bool isHosting;
-    private string hostedGameName;
-    private string hostedGamePassword;
-    private int hostedGameNPlayers;
 
     private void Awake()
     {
@@ -53,16 +49,12 @@ public class ApplicationManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(openingScene);
     }
 
-    public void HostGame(string name, string password, int nPlayers)
+    public void HostGame()
     {
         isPlaying = true;
         isHosting = true;
-        hostedGameName = name;
-        hostedGamePassword = password;
-        hostedGameNPlayers = nPlayers;
 
         networkManager.StartHost();
-        TryRegisterWithMatchmaker();
     }
 
     public void JoinGame(string ipAddress)
@@ -79,27 +71,6 @@ public class ApplicationManager : MonoBehaviour
         Application.Quit();
     }
 
-    public List<string> GetActiveHosts()
-    {
-        List<string> hostsAvailable = new List<string>();
-
-        hostsAvailable.Add("host1");
-        hostsAvailable.Add("host2");
-        hostsAvailable.Add("host3");
-
-        return hostsAvailable;
-    }
-
-    private void TryRegisterWithMatchmaker()
-    {
-
-    }
-    private void TryUnregisterFromMatchmaker()
-    {
-
-    }
-
-    
 
     private void Update()
     {
