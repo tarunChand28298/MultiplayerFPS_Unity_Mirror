@@ -12,6 +12,8 @@ enum MenuPage
 
 public class MainMenuManager : MonoBehaviour
 {
+    public AudioSource clickSound;
+
     private float tweeningTime = 0.1f;
 
     public GameObject container;
@@ -43,6 +45,7 @@ public class MainMenuManager : MonoBehaviour
 
     private void HandleMenubuttonClicked(MenuPage buttonClicked)
     {
+        clickSound.Play();
         if(currentMenu == null)
         {
             TweenInNewPage(buttonClicked);
