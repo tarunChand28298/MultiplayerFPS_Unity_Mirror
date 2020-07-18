@@ -331,6 +331,8 @@ MonoBehaviour:
   - {fileID: 7867865654120950606, guid: 217b5af85fe006d4eb97c1140343930d, type: 3}
   - {fileID: 5668115430244754270, guid: c883957176db0564681d4f6955e94aa9, type: 3}
   - {fileID: 8351960459993467884, guid: 7ee8b781236759549b01a0bf25a4342c, type: 3}
+  - {fileID: 5877998314910098549, guid: 4648f9fe28c51fd4dafcd2418afde68c, type: 3}
+  - {fileID: 5877998314910098549, guid: 1b9c9868cf266724694793fd7f25bf17, type: 3}
   GameScene: Assets/Scenes/GameScene.unity
   playerControllerPrefab: {fileID: 7867865654120950606, guid: 217b5af85fe006d4eb97c1140343930d,
     type: 3}

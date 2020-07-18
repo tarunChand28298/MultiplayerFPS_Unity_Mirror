@@ -108,8 +108,8 @@ public class Pawn : NetworkBehaviour
     }
     public void ResupplyAmmo()
     {
-        totalBulletsLeft = 100;
         bulletsInMag = 10;
+        totalBulletsLeft = 100;
     }
 
     [ClientRpc] void RpcShoot()

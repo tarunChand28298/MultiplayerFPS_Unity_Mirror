@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -4726586332315567668}
   - component: {fileID: 5025573261962318859}
   - component: {fileID: -4819912327432356963}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: HealthPickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,12 +108,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ammoPickupMesh
       objectReference: {fileID: 0}
-    - target: {fileID: -5178661895559278292, guid: 82bd143d7ba2d3540b294cc0b7a407ea,
+    - target: {fileID: -927199367670048503, guid: 82bd143d7ba2d3540b294cc0b7a407ea,
         type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: -5495902117074765545, guid: ce3b6c722f9aa2445ae186c96c3f0e99,
-        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 82bd143d7ba2d3540b294cc0b7a407ea,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -184,6 +183,17 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.142808
       objectReference: {fileID: 0}
+    - target: {fileID: -5178661895559278292, guid: 82bd143d7ba2d3540b294cc0b7a407ea,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -5495902117074765545, guid: ce3b6c722f9aa2445ae186c96c3f0e99,
+        type: 3}
+    - target: {fileID: -1504981713932161579, guid: 82bd143d7ba2d3540b294cc0b7a407ea,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c5d056351c4cbdb41a0d6e5c9c9a82ae, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82bd143d7ba2d3540b294cc0b7a407ea, type: 3}
 --- !u!4 &7817981038208005986 stripped

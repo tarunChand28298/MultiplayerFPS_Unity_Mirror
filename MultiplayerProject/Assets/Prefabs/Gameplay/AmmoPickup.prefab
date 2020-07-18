@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4595621215170438375}
   - component: {fileID: 3402051489773938860}
   - component: {fileID: 1916668350435858380}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AmmoPickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,6 +108,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ammoPickupMesh
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 82bd143d7ba2d3540b294cc0b7a407ea,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 82bd143d7ba2d3540b294cc0b7a407ea,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -178,6 +183,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.17851
       objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: 82bd143d7ba2d3540b294cc0b7a407ea,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b71d8dc75399feb4e85863428192672a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82bd143d7ba2d3540b294cc0b7a407ea, type: 3}
 --- !u!4 &7817981038208005986 stripped
