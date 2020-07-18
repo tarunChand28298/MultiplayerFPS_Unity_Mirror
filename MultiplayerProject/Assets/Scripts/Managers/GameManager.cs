@@ -14,6 +14,9 @@ public class GameManager : NetworkBehaviour
     public GameObject scoreUIPrefab;
     GameObject currentScoreUIGameObject;
 
+    public GameObject healthPickupPrefab;
+    public GameObject ammoPickupPrefab;
+
     private bool putInA = true;
 
     [SyncVar(hook = nameof(UpdateScoreUIForA))] public int teamAScore = 0;
@@ -58,6 +61,10 @@ public class GameManager : NetworkBehaviour
         else { teamAScore++; }
 
         NetworkServer.Destroy(controller.controlledPawn);
+
+        GameObject whichPickupToSpawn = Random.Range(0, 2) == 0 ? healthPickupPrefab : ammoPickupPrefab;
+        GameObject spawnedPickup = Instantiate(whichPickupToSpawn, controller.controlledPawn.transform.position, controller.controlledPawn.transform.rotation);
+        NetworkServer.Spawn(spawnedPickup);
     }
 
     void UpdateScoreUIForA(int oldValue, int newValue)

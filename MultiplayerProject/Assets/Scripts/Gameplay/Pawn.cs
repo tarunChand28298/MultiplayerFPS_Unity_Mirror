@@ -102,6 +102,15 @@ public class Pawn : NetworkBehaviour
         }
 
     }
+    public void RegenHealth()
+    {
+        health = 100;
+    }
+    public void ResupplyAmmo()
+    {
+        totalBulletsLeft = 100;
+        bulletsInMag = 10;
+    }
 
     [ClientRpc] void RpcShoot()
     {
