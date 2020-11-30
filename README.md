@@ -1,4 +1,4 @@
-# MultiplayerFPS_Unity_Mirror
+# Multiplayer FPS
 This is a LAN multiplayer FPS game made in Unity and Mirror plugin for multiplayer. The game has been published on itch.io and can be downloaded from [here](https://tc28021998.itch.io/hyperdualmultiplayer)
 
 ## Motivation
